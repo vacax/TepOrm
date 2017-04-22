@@ -25,9 +25,11 @@ public class Curso implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nombre;
-    @ManyToOne
+    
+    @ManyToOne //relaciones
     private Profesor profesor;
-    @ManyToMany
+    
+    @ManyToMany //tener tabla cruzada...
     private Set<Estudiante> listaEstudiante;
 
     /**

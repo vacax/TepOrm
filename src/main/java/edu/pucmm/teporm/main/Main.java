@@ -1,6 +1,7 @@
 package edu.pucmm.teporm.main;
 
 import edu.pucmm.teporm.entidades.Estudiante;
+import edu.pucmm.teporm.entidades.Profesor;
 import edu.pucmm.teporm.servicios.EstudianteServices;
 import freemarker.template.SimpleDate;
 import java.text.SimpleDateFormat;
@@ -38,7 +39,19 @@ public class Main {
                 "Nuevo Estudiante");
         estudianteServices.insertarEstudiante(estudianteNuevo);
         
-        estudianteServices.insertarCurso("Mi Curso");
+        //Creando un curso y asignado el profesor y estudiante
+        estudianteServices.insertarCurso("Mi Curso "+secuenciaMatricula);
+        
+        //Mostrando los cursos que tiene asignado un profesor.
+        estudianteServices.listarCursosProfesor("001-0001001-1");
+        
+        Profesor profesor = estudianteServices.getProfesorPorCedula("001-0001001-1");
+        System.out.println("Nombre del profesor: "+profesor.getNombre());
+        profesor.setNombre("Carlos Camacho");
+        System.out.println("Nombre del profesor actualizado Objeto: "+profesor.getNombre());
+        estudianteServices.actualizarViaMerge(profesor);
+        
+        estudianteServices.consultaNativaSql();
 
     }
 

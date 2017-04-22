@@ -6,9 +6,12 @@
 package edu.pucmm.teporm.entidades;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,6 +24,9 @@ public class Profesor implements Serializable{
     //@Column(length = 11) //configuracion de los campos.
     private String cedula;
     private String nombre;
+    
+    @OneToMany(mappedBy = "profesor") //aplicando la bidirección
+    private Set<Curso> listaCurso;
 
     public Profesor() { // es obligatorio el constructor vacio.
     }
@@ -29,6 +35,14 @@ public class Profesor implements Serializable{
         this.cedula = cedula;
         this.nombre = nombre;
     }    
+
+    public Set<Curso> getListaCurso() {
+        return listaCurso;
+    }
+
+    public void setListaCurso(Set<Curso> listaCurso) {
+        this.listaCurso = listaCurso;
+    }   
     
 
     /**

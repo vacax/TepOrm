@@ -8,6 +8,8 @@ package edu.pucmm.teporm.entidades;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 /**
  *
@@ -34,6 +36,18 @@ public class Estudiante implements Serializable{ //debe implementar la interfaz 
     public Estudiante(String matricula, String nombre) {
         this.matricula = matricula;
         this.nombre = nombre;
+    }
+    
+    /**
+     * Metodo callback de JPA.
+     */
+    @PrePersist
+    @PreUpdate
+    private void validarMatricula(){
+        System.out.println("Verificando la matrícula del estudiante");
+        if(matricula.length()!=9){
+            throw new RuntimeException("Matrícula no valida...");
+        }
     }
     
     /**
